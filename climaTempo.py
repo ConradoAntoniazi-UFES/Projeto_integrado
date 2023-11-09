@@ -22,9 +22,11 @@ soup = BeautifulSoup(html, 'html.parser')
 #pegando a tag html inteira
 temperatura_min = soup.find(id="min-temp-1")
 temperatura_max = soup.find(id="max-temp-1")
+#chuva = soup.find("span", class_="_margin-l-5")
 
 #print(temperatura_max)
 #print(temperatura_min)
 
 print(f"\nA temperatura máxima em {cidade} é de {temperatura_max.string}")
 print(f"A temperatura máxima em {cidade} é de {temperatura_min.string}")
+#print(f"chuva: {chuva.string}")

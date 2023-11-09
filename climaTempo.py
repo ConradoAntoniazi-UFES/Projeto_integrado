@@ -4,16 +4,23 @@ import requests
 
 cidade = input("Digite uma cidade na grande Vitória:\n")
 
+response = 0
+
 #Qual cidade será analisada
 if cidade.lower() == 'cariacica':
-    html = requests.get("https://www.climatempo.com.br/previsao-do-tempo/cidade/723/cariacica-es").content
+    response = requests.get("https://www.climatempo.com.br/previsao-do-tempo/cidade/723/cariacica-es")
 elif cidade.lower() == 'vitoria':
-    html = requests.get("https://www.climatempo.com.br/previsao-do-tempo/cidade/84/vitoria-es").content
+    response = requests.get("https://www.climatempo.com.br/previsao-do-tempo/cidade/84/vitoria-es")
 elif cidade.lower() == 'vila velha':
-    html = requests.get("https://www.climatempo.com.br/previsao-do-tempo/cidade/83/vilavelha-es").content
+    response = requests.get("https://www.climatempo.com.br/previsao-do-tempo/cidade/83/vilavelha-es")
 elif cidade.lower() == 'serra':
-    html = requests.get("https://www.climatempo.com.br/previsao-do-tempo/cidade/80/serra-es").content
+    response = requests.get("https://www.climatempo.com.br/previsao-do-tempo/cidade/80/serra-es")
 
+if response.status_code != 200:
+    print("problema na requisição ao servidor")
+    exit(1)
+
+html = response.content
 
 soup = BeautifulSoup(html, 'html.parser')
 

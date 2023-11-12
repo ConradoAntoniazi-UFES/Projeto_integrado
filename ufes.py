@@ -1,10 +1,17 @@
-from bs4 import BeautifulSoup
 import requests
+from bs4 import BeautifulSoup as bs
 
-html = requests.get("https://www.ufes.br/").content
+# Solicita a data para busca do cardápio correspondente àquele dia
+data = input("Digite a data no modelo aaaa-mm-dd:")
 
-soup = BeautifulSoup(html, 'html.parser')
+# URL do site do cardápio do dia informado
+url = f"https://ru.ufes.br/cardapio/{data}"
 
-text = soup.find(id="quicktabs-container-quicktabs_noticias")
+# Envia uma solicitação HTTP GET para a página do perfil
+response = requests.get(url)
 
-print(text.get_text())
+# Quebra o código caso não consiga acessar a página
+if response.status_code != 200:
+    print("Não foi possivel acessar a página!")
+    exit(1)
+

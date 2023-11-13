@@ -15,3 +15,12 @@ if response.status_code != 200:
     print("Não foi possivel acessar a página!")
     exit(1)
 
+#CASO TENHA CHEGADO ATÉ AQUI, FOI POSSÍVEL ABRIR A PÁGINA
+
+# Parseia o conteúdo HTML da página (organiza o código da página HTML para ficar mais fácil de ser trabalhada)
+html = bs(response.text, 'html.parser')
+
+#caixa (div) que contém o cardápio do RU daquele dia
+cardapio = html.find("div", class_="view-content")
+
+print(cardapio.get_text())

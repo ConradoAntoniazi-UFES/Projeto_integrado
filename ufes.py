@@ -23,4 +23,10 @@ html = bs(response.text, 'html.parser')
 #caixa (div) que contém o cardápio do RU daquele dia
 cardapio = html.find("div", class_="view-content")
 
-print(cardapio.get_text())
+cardapio_text = cardapio.get_text().strip()
+
+if "Almoço" in cardapio_text:
+    print("\n\033[0;32mCARDÁPIO DO RU:\033[m\n")
+    print(cardapio_text)
+else:
+    print("\n\033[0;31mNão foi possível encontrar o cardápio desse dia!\nTente mais tarde e certifique-se que o dia informado é válido.\033[m\n")

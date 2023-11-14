@@ -1,8 +1,11 @@
 import requests
 from bs4 import BeautifulSoup as bs
+from datetime import date
+
+data = date.today()
 
 # Solicita a data para busca do cardápio correspondente àquele dia
-data = input("Digite a data no modelo aaaa-mm-dd:")
+data = date.today()
 
 # URL do site do cardápio do dia informado
 url = f"https://ru.ufes.br/cardapio/{data}"

@@ -6,9 +6,9 @@ def send_email(nome, email, cardapio_ru):
     msg = EmailMessage()
 
     msg['Subject'] = "CARDÁPIO DO RU"
-    msg['From'] = 'conradoantoniazi@gmail.com'
+    msg['From'] = 'webscrapingufes@gmail.com'
     msg['To'] = email
-    password = ''
+    password = 'ihjcxwxfvsaoxwsn'
 
     msg.add_header('Content-Type', 'text/html')
     email_content = f"""

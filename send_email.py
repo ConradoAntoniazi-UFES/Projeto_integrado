@@ -8,7 +8,7 @@ def send_email(nome, email, cardapio_ru):
     msg['Subject'] = "CARDÁPIO DO RU"
     msg['From'] = 'webscrapingufes@gmail.com'
     msg['To'] = email
-    password = 'ihjcxwxfvsaoxwsn'
+    password = ''
 
     msg.add_header('Content-Type', 'text/html')
     email_content = f"""

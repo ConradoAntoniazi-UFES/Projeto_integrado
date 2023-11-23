@@ -35,16 +35,12 @@ def acha_texto_cardapio(html):
         print("Problema na extração do cardápio da UFES.")
         exit(1)
     
-    cardapio_text = cardapio_html.get_text().strip()
+    cardapio_text = cardapio_html.get_text().strip().split("\n")
 
     if not ("Almoço" in cardapio_text):
         return None
     
-    cardapio_format = cardapio_text.split("\n")
-
-    cardapio_format = '\n'.join(cardapio_format)
-
-    return cardapio_format
+    return cardapio_text
 
 
 # retorna o cardápio do dia
@@ -56,3 +52,13 @@ def retorna_cardapio_ru():
     cardapio_ru = acha_texto_cardapio(html)
 
     return cardapio_ru
+
+
+cardapio_do_dia = retorna_cardapio_ru()
+
+if cardapio_do_dia: 
+    print("\n\033[0;32mCARDÁPIO DO RU:\033[m\n")
+    print(cardapio_do_dia)
+        
+else:
+    print("\n\033[0;31mNão foi possível encontrar o cardápio desse dia!\nTente mais tarde e certifique-se que o dia informado é válido.\033[m\n")

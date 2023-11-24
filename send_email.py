@@ -1,6 +1,5 @@
 import smtplib
 from email.message import EmailMessage
-import os
 
 def send_email(nome, email, cardapio_ru):  
     msg = EmailMessage()

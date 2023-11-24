@@ -51,18 +51,51 @@ def Add_user_data (new_user):
             # Adicionando o novo usuário à lista existente
             data_base_json["users"].append(new_user)
 
+            # Acrescentando uma unidade ao atributo "quantity"
+            data_base_json["quantity"] += 1
+
             # Abre o arquivo novamente no modo de escrita
             with open(arq, 'w') as file_json:
                 # Escreve de volta ao arquivo JSON
                 json.dump(data_base_json, file_json, indent=2)
+            
+            print("\033[0;32mUsuário cadastrado com sucesso\033[m")
         
     except FileNotFoundError:
         # Se o arquivo não existe, cria um novo
         with open(arq, 'w') as file_json:
             # Cria um novo dicionário com o novo usuário
             data_base_json = {
-                "users": [new_user]
+                "users": [new_user],
+                "quantity": 1
             }
 
             # Escreve o dicionário no arquivo JSON
             json.dump(data_base_json, file_json, indent=2)
+
+def Remove_user_data (email_remove):
+    arq = "data_base.json"
+    try:
+        # Tenta abrir o arquivo no modo de leitura e escrita
+        with open(arq, 'r') as file_json:
+            # Tenta carregar o conteúdo do arquivo JSON
+            data_base_json = json.load(file_json)
+
+            #varrendo o data_base e procurando o email a ser removido
+            for i in range(data_base_json["quantity"]):
+                if data_base_json["users"][i]["email"] == email_remove:
+                    data_base_json["users"].pop(i)
+
+            # Removendo uma unidade ao atributo "quantity"
+            data_base_json["quantity"] -= 1
+
+            # Abre o arquivo novamente no modo de escrita
+            with open(arq, 'w') as file_json:
+                # Escreve de volta ao arquivo JSON
+                json.dump(data_base_json, file_json, indent=2)
+            
+            print("\033[0;32mUsuário cadastrado com sucesso\033[m")
+        
+    except FileNotFoundError:
+        # Se o arquivo não existe, cria um novo
+        print("\n\033[0;31mO arquivo não existe e não há nada a ser removido\033[m\n")

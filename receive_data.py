@@ -1,6 +1,5 @@
 # Importar o módulo
 import json
-from time import sleep
 import os
 
 # Verificando se o email ja foi cadastrado
@@ -25,7 +24,6 @@ def Get_user (users):
     nome = input("Digite o nome para cadastro: ")
     email = get_email(users)
     
-    print("Cadastro feito com sucesso.")
     user = {
         "name": nome,
         "email": email
@@ -94,8 +92,8 @@ def Remove_user_data (email_remove):
                 # Escreve de volta ao arquivo JSON
                 json.dump(data_base_json, file_json, indent=2)
             
-            print("\033[0;32mUsuário cadastrado com sucesso\033[m")
+            print("\n\033[0;33mUsuário removido com sucesso\033[m\n")
         
     except FileNotFoundError:
         # Se o arquivo não existe, cria um novo
-        print("\n\033[0;31mO arquivo não existe e não há nada a ser removido\033[m\n")
+        print("\n\033[0;31mO arquivo não existe e não há nada a ser removido\033[m")

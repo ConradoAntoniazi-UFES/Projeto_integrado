@@ -1,4 +1,5 @@
 import os
+from time import sleep
 from receive_data import *
 
 def ImprimeOpcoes():
@@ -7,11 +8,12 @@ def ImprimeOpcoes():
     print("3 - Listar usuários cadastrados.")
     print("4 - Sair.")
 
-# abre um arquivo .json, onde tem as informações sobre os usuários cadastrados
-with open("data_base.json") as file_json:
-    data_base = json.load(file_json) # ususario recebe um dicionário correspondente ao conteúdo do .json
 
 while True:
+    # abre um arquivo .json, onde tem as informações sobre os usuários cadastrados
+    with open("data_base.json") as file_json:
+        data_base = json.load(file_json) # ususario recebe um dicionário correspondente ao conteúdo do .json
+    
     #limpando o terminal para estética
     os.system('cls' if os.name == 'nt' else 'clear')
     #lendo o que o usuário deseja fazer
@@ -32,6 +34,7 @@ while True:
     elif acao == 2:
         email_remove = input("Digite o email do usuário a ser removido:\n")
         Remove_user_data(email_remove)
+        sleep(2)
 
     elif acao == 3:
         if data_base["quantity"] == 0:
@@ -42,7 +45,9 @@ while True:
             email = data_base["users"][c]["email"]
             print(f"{nome}:{email}")
             sleep(0.5)
-        sleep(5)
+        
+        acao_stop = input("\nAperte qualquer tecla para sair da listagem:\n")
+        
     elif acao == 4:
         break
     

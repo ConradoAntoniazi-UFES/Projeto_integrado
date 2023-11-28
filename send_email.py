@@ -7,14 +7,17 @@ def send_email(nome, email, cardapio_ru):
     msg['Subject'] = "CARDÁPIO DO RU"
     msg['From'] = 'webscrapingufes@gmail.com'
     msg['To'] = email
-    password = ''
+    password = 'ihjcxwxfvsaoxwsn '
+
+    cardapio = cardapio_ru.replace('\n', '<br>')
 
     msg.add_header('Content-Type', 'text/html')
     email_content = f"""
     <p><b>===Cardápio RU===</b></p>
     <p>Olá {nome}! Este é o cardápio de hoje:<p>
-    <p>{cardapio_ru}</p>
-    """    
+    <p>{cardapio}</p>
+    """
+ 
     msg.set_content(email_content, subtype='html')
 
     try:

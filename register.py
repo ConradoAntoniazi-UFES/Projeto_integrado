@@ -16,7 +16,7 @@ while True:
     os.system('cls' if os.name == 'nt' else 'clear')
     #lendo o que o usuário deseja fazer
     ImprimeOpcoes()
-    acao = input("Digite um número:\n")
+    acao = int(input("Digite um número:\n"))
     
     if acao == 1:
         new_user = Get_user(data_base["users"])
@@ -34,11 +34,15 @@ while True:
         Remove_user_data(email_remove)
 
     elif acao == 3:
+        if data_base["quantity"] == 0:
+            print("Não há ninguém cadastrado\n")
+            
         for c in range(data_base["quantity"]):
-            nome = data_base["users"][c]["nome"]
+            nome = data_base["users"][c]["name"]
             email = data_base["users"][c]["email"]
             print(f"{nome}:{email}")
-
+            sleep(0.5)
+        sleep(5)
     elif acao == 4:
         break
     

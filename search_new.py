@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup as bs
-from datetime import date
 
 # retorna um objeto BeautifulSoup contendo a estura da página endereçada por 'url'
 def get_html(url):
@@ -18,37 +17,37 @@ def get_html(url):
     html = bs(response.text, 'html.parser')
     return html
 
-# retorna a url da página contendo o cardápio do ru
-def faz_url_ru():
-    # Solicita a data para busca do cardápio correspondente àquele dia
-    data = date.today()
+# retorna a url da página contendo as ultimas noticas
+def faz_url_noticia(indice):
 
-    # URL do site do cardápio do dia informado
-    return f"https://ru.ufes.br/cardapio/{data}"
+    # URL da página com o numero do indece informado
+    return f"https://www.ufes.br/noticias?page={indice}"
 
-# retorna o cardápio em si ou None, se não for encontrado
-def acha_texto_cardapio(html):
+# retorna as noticias em si
+def acha_texto_noticia(html):
     #caixa (div) que contém o cardápio do RU daquele dia
-    cardapio_html = html.find("div", class_="view-content")
-
-    if not cardapio_html:
-        print("Problema na extração do cardápio da UFES.")
+    noticia_html = html.find_all("div", class_="view-content")
+    print(noticia_html)
+    exit(1)
+    if not noticia_html:
+        print("Problema na extração da noticia.")
         exit(1)
     
-    cardapio_text = cardapio_html.get_text().strip()
+    noticia_text = noticia_html.get_text().strip()
 
-    if not ("Almoço" in cardapio_text):
-        return None
-
-    return cardapio_text
+    return noticia_text
 
 
 # retorna o cardápio do dia
-def retorna_cardapio_ru():
-    url = faz_url_ru()
+def retorna_noticia():
+    url = faz_url_noticia('0')
 
     html = get_html(url)
 
-    cardapio_ru = acha_texto_cardapio(html)
+    cardapio_ru = acha_texto_noticia(html)
 
     return cardapio_ru
+
+
+noticia = retorna_noticia()
+print(noticia)
